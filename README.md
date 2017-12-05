@@ -1,5 +1,3 @@
-# （非官方)毛线玩家数据榜单
+# 「非官方」毛线玩家数据榜单
 
-## TODO
-
-- [ ] 复刻旧版站点
+传送门：https://kedamamc-pcc.github.io/stats/
