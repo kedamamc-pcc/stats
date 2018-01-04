@@ -49,7 +49,13 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    overlay: true
+    overlay: true,
+    proxy: {
+      '/stats-data/ranks/latest.json': {
+        target: 'http://localhost:8080',
+        pathRewrite: {'^/stats-data/ranks/latest.json': '/mock/ranks.json'}
+      }
+    }
   },
   performance: {
     hints: false

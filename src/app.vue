@@ -4,7 +4,7 @@
   import Rank from './components/rank.vue'
   import './style.pcss'
 
-  const RANKS_URL = './ranks.json'
+  const RANKS_URL = '/stats-data/ranks/latest.json'
 
   export default {
     name: 'App',
@@ -45,7 +45,7 @@
   <div id="app">
     <header>
       <div class="block">
-        <strong><a href="https://craft.moe/">毛玉線圈物語</a>「非官方」玩家数据榜单</strong>
+        <strong><a href="https://craft.moe/">毛玉線圈物語</a>玩家数据榜单<sup>「非官方」</sup></strong>
         <span>数据新鲜度：{{update}}</span>
       </div>
     </header>
