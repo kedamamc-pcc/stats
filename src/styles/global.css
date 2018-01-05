@@ -1,3 +1,7 @@
 @custom-media --phone (width <= 425px);
 @custom-media --tablet (width > 425px) and (width <= 768px);
 @custom-media --medium-screen (width <= 768px);
+
+:root {
+  --pageWidth: 930px;
+}
