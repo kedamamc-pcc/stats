@@ -89,7 +89,11 @@
     <section class="ranks">
       <pre style="width: 1000px;background: #F0F;margin: auto;text-align: center;font-size: 10px;">1000px</pre>
       <div class="wrapper">
-        <Rank v-for="(rank, idx) of ranks" :key="idx" :title="rank.title" :items="rank.players" :unit="rank.unit" :description="rank.description"/>
+        <div v-for="group of ranks" class="group">
+          <h3>{{group.title}}</h3>
+          <Rank v-for="(rank, idx) of group.rankings" :key="idx" :title="rank.title" :items="rank.players" :unit="rank.unit" :description="rank.description"/>
+          <div v-for="num of 3 - (group.rankings.length % 3 || 3)" class="empty"></div>
+        </div>
       </div>
     </section>
 
@@ -216,15 +220,29 @@
     }
 
     & > .wrapper {
+      margin: auto;
+      padding-bottom: 15px;
+    }
+
+    & .group {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      margin: auto;
-      padding-bottom: 15px;
 
       & > * {
         flex: 0 0 300px;
         margin-top: 15px;
+      }
+
+      & > h3 {
+        flex-basis: 100%;
+        line-height: 1;
+        margin: 30px 0 0;
+      }
+
+      & .empty {
+        border-radius: 5px;
+        box-shadow: 0 0 0 1px #ddd;
       }
     }
   }
