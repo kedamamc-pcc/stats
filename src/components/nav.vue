@@ -53,9 +53,8 @@
         return this.$store.state.players.filter(x => {
           let birthday = new Date(x.time_start)
           let M = birthday.getFullYear() + "-" + (birthday.getMonth() + 1) + "-" + birthday.getDate()
-          let D = new Date()
-          let T = new Date(D.getTime() - (24 * 60 * 60 * 1000))
-          let S = new Date(T)
+          let D = new Date().getTime() - (24 * 60 * 60 * 1000)
+          let S = new Date(D)
           let P = S.getFullYear() + "-" + (S.getMonth() + 1) + "-" + S.getDate()
           return M === P
         }).length
@@ -67,9 +66,8 @@
         return this.$store.state.players.filter(x => {
           let birthday = new Date(x.time_last)
           let M = birthday.getFullYear() + "-" + (birthday.getMonth() + 1) + "-" + birthday.getDate()
-          let D = new Date()
-          let T = new Date(D.getTime() - (24 * 60 * 60 * 1000))
-          let S = new Date()
+          let D = new Date().getTime() - (24 * 60 * 60 * 1000)
+          let S = new Date(D)
           let P = S.getFullYear() + "-" + (S.getMonth() + 1) + "-" + S.getDate()
           return M === P
         }).length

@@ -19,7 +19,7 @@
       },
       Time_Last(){
         let re=_.groupBy(this.$store.state.players,function(item){
-          let D = item.time_last - (24 * 60 * 60 * 1000)
+          let D = item.time_last
           return (new Date(D).getFullYear()+"-"+(new Date(D).getMonth()+1)+"-"+new Date(D).getDate());
         })
         let T = new Date().getTime()-(24 * 60 * 60 * 1000)
