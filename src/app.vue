@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <nav id="nav">#nav</nav>
+    <Nav/>
     <main id="main">
       <div class="wrap">
-        <section id="top-panel">#top-panel</section>
+        <section id="top-panel">{{this.update}}</section>
         <section id="boards">
           <Board v-for="n of 12" :key="n"/>
         </section>
@@ -14,11 +14,26 @@
 </template>
 
 <script>
+  import Nav from './components/nav'
   import Board from './components/board'
 
   export default {
     components: {
+      Nav,
       Board,
+    },
+    computed: {
+      update() {
+        return new Date(this.$store.state.update)
+      },
+    },
+    async beforeCreate() {
+      const [info, players] = [
+        await this.$http.get('/stats-data/info.json'),
+        await this.$http.get('/stats-data/players.json'),
+      ]
+      this.$store.commit('update', info.latest_update)
+      this.$store.commit('players', players.players)
     },
   }
 </script>
@@ -34,7 +49,6 @@
     font-family: -apple-system, "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "Source Han Sans SC", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: #2c3e50;
     position: relative;
     display: flex;
