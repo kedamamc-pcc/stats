@@ -18,6 +18,8 @@
 <style>
   .board {
     background: #9f9;
+    flex: 0 0 300px;
+    margin-bottom: 30px;
   }
 
   .board li {
