@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <article class="board">
     <h1>.board</h1>
     <p class="description">.description</p>
@@ -15,6 +15,13 @@
   </article>
 </template>
 
+<script>
+  export default {
+    data() {
+      return {}
+    }
+  }
+</script>
 <style>
   .board {
     background: #9f9;

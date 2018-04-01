@@ -8,9 +8,10 @@
   import Board from '@/components/board'
 
   export default {
+    name: 'board',
     components: {
       Board,
-    },
+    }
   }
 </script>
 
