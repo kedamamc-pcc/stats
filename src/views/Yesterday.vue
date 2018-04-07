@@ -1,5 +1,6 @@
-<template>
+﻿<template>
     <div>
+      <span>当前时间:{{time}}</span>
       <p v-for="(list,k) in Yesterday" :key="k">
         {{list.name}}
       </p>
@@ -24,6 +25,11 @@
           return M === P
         })
       },
+      time(){
+        let D = new Date()
+        let T = (D.getMonth() + 1) + "月" + D.getDate()+"日"
+        return T
+      }
     }
 	}
 </script>

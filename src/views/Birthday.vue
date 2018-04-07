@@ -1,14 +1,15 @@
 <template>
-<div>
-  <code>N年前你们来到了毛线！</code>
-  <p v-for="(list,k) in Birthday" :key="k">{{list.name}}</p>
-</div>
+  <div>
+    <code>N年前的{{time}}你们来到了毛线！感谢有你！</code>
+    <p v-for="(list,k) in Birthday" :key="k">{{list.name}}</p>
+  </div>
 </template>
 
 <script>
+
   export default {
     name: "birthday",
-    computed:{
+    computed: {
       /**
        * @return {number}
        */
@@ -20,6 +21,11 @@
           let T = (D.getMonth() + 1) + "-" + D.getDate()
           return M === T
         })
+      },
+      time(){
+        let D = new Date()
+        let T = (D.getMonth() + 1) + "月" + D.getDate()+"日"
+        return T
       }
     }
   }

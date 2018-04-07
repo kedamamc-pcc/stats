@@ -1,13 +1,14 @@
 <template>
-    <div>
-      <p v-for="(list,k) in Time_Last">{{list.name}}</p>
-    </div>
+  <div>
+    <span>当前时间:{{time}}</span>
+    <p v-for="(list,k) in Time_Last" :key="k">{{list.name}}</p>
+  </div>
 </template>
 
 <script>
-	export default {
-		name: "last",
-    computed:{
+  export default {
+    name: "last",
+    computed: {
       /**
        * @return {number}
        */
@@ -21,8 +22,14 @@
           let P = S.getFullYear() + "-" + (S.getMonth() + 1) + "-" + S.getDate()
           return M === P
         })
-    }}
-	}
+      },
+      time(){
+        let D = new Date()
+        let T = (D.getMonth() + 1) + "月" + D.getDate()+"日"
+        return T
+      }
+    }
+  }
 </script>
 
 <style scoped>
