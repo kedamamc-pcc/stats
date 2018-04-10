@@ -1,39 +1,61 @@
 <template functional>
-  <article class="board">
-    <h1>.board</h1>
-    <p class="description">.description</p>
+  <article :class="[data.class, $style.board_wrap]">
+    <h1>{{props.title}}</h1>
+    <p :class="$style.description">{{props.description}}</p>
     <ol>
-      <li v-for="n of 10" :key="n">
-        <code>code</code>
+      <li v-for="(r, idx) of props.ranks" :key="idx">
+        <code>{{r.name}}</code>
         <span>
-          <strong>strong</strong>
-          <em>em</em>
+          <strong>{{r.score}}</strong>
+          <em>{{props.unit}}</em>
         </span>
       </li>
     </ol>
-    <p class="lore">.lore</p>
+    <p :class="$style.lore">{{props.lore}}</p>
   </article>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {}
+<style module>
+  .board_wrap {
+    & h1 {
+      text-align: center;
+      font-size: 1.5em;
+      margin: 20px 0 15px;
     }
-  }
-</script>
-<style>
-  .board {
-    background: #9f9;
-    flex: 0 0 300px;
-    margin-bottom: 30px;
+
+    & ol {
+      margin: 15px 0;
+      padding: 0 30px;
+      list-style-position: inside;
+      position: relative;
+
+      & code {
+        position: absolute;
+        left: 60px;
+      }
+
+      & span {
+        float: right;
+      }
+
+      & strong {
+        font-weight: normal;
+        font-family: monospace;
+      }
+
+      & em {
+        font-style: normal;
+        margin-left: .3em;
+      }
+    }
+
   }
 
-  .board li {
-    text-align: left;
+  .description {
+    margin: 15px 20px;
   }
 
-  .board .lore {
-    font-style: italic;
+  .lore {
+    margin: 15px 20px 20px;
   }
 </style>

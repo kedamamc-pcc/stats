@@ -3,7 +3,7 @@
     <div :class="$style.wrap">
       <h1>
         <a href="https://www.craft.moe/" :class="$style.link_kedama">毛玉線圈物語</a>
-        <router-link to="/Boards" :class="$style.link_home">玩家数据统计</router-link>
+        <router-link to="/" :class="$style.link_home">玩家数据统计</router-link>
         <sup :class="$style.link_kpcc"><a href="https://kpcc.moe/">｢非官方｣</a></sup>
       </h1>
       <dl>

@@ -4,7 +4,7 @@
     <main id="main">
       <router-view/>
     </main>
-    <footer id="footer">#footer</footer>
+    <footer id="footer">Made with ❤ by KPCC</footer>
   </div>
 </template>
 
@@ -47,10 +47,10 @@
   }
 
   #footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: #99f;
+    text-align: center;
+    color: #ccc;
+    line-height: 60px;
     flex: 0;
+    border-bottom: 4px solid #F39F0D;
   }
 </style>

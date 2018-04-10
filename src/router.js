@@ -21,11 +21,6 @@ export default new Router({
       component: Boards,
     },
     {
-      name:'Boards',
-      path: '/Boards',
-      component: Boards,
-    },
-    {
       name:'PlayersList',
       path: '/Players',
       component: Players,
