@@ -51,6 +51,6 @@
     color: #ccc;
     line-height: 60px;
     flex: 0;
-    border-bottom: 4px solid #F39F0D;
+    border-bottom: 6px solid #F39F0D;
   }
 </style>

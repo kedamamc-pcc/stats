@@ -1,9 +1,16 @@
 <template>
-  <div :class="$style.boards_wrap">
-    <div v-for="(d, idx) of rankData" :class="$style.cell">
-      <Board :key="idx" v-bind="d"/>
-    </div>
-    <div v-for="n of 3 - (rankData.length % 3 || 3)" :class="$style.cell"></div>
+  <div :class="$style.view_wrap">
+    <section :class="$style.group">
+      <header :class="$style.group_header">
+        <h1 :class="$style.group_title">玩家统计榜单</h1>
+      </header>
+      <div :class="$style.boards">
+        <div v-for="(d, idx) of rankData" :class="$style.cell">
+          <Board :key="idx" v-bind="d"/>
+        </div>
+        <div v-for="n of 3 - (rankData.length % 3 || 3)" :class="$style.cell"></div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -46,8 +53,23 @@
 </script>
 
 <style module>
-  .boards_wrap {
-    composes: app-section from '../global.css';
+  .group_header {
+    border: solid #f0f;
+    border-width: 1px 0;
+    padding: 20px 0;
+    margin-bottom: -1px;
+    position: relative;
+  }
+
+  .group_title {
+    composes: middle-section from '../global.css';
+
+    font-size: 1.5em;
+    font-weight: normal;
+  }
+
+  .boards {
+    composes: middle-section from '../global.css';
 
     display: flex;
     flex-wrap: wrap;
