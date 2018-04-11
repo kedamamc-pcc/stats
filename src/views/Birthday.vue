@@ -6,26 +6,21 @@
 </template>
 
 <script>
-
+  import _ from 'lodash'
   export default {
     name: "birthday",
     computed: {
-      /**
-       * @return {number}
-       */
-      Birthday() {
-        return this.$store.state.players.filter(x => {
-          let birthday = new Date(x.time_start)
-          let M = (birthday.getMonth() + 1) + "-" + birthday.getDate()
-          let D = new Date()
-          let T = (D.getMonth() + 1) + "-" + D.getDate()
-          return M === T
-        })
-      },
       time(){
         let D = new Date()
         let T = (D.getMonth() + 1) + "月" + D.getDate()+"日"
         return T
+      },
+      Birthday(){
+        let re=_.groupBy(this.$store.state.players,function(item){
+          return ((new Date(item.time_start).getMonth()+1)+"-"+new Date(item.time_start).getDate());
+        })
+        let D = new Date()
+        return re[(D.getMonth()+1)+"-"+D.getDate()]
       }
     }
   }

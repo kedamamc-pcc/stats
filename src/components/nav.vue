@@ -69,7 +69,7 @@
           let M = birthday.getFullYear() + "-" + (birthday.getMonth() + 1) + "-" + birthday.getDate()
           let D = new Date()
           let T = new Date(D.getTime() - (24 * 60 * 60 * 1000))
-          let S = new Date(T)
+          let S = new Date()
           let P = S.getFullYear() + "-" + (S.getMonth() + 1) + "-" + S.getDate()
           return M === P
         }).length

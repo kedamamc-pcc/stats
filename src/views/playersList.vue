@@ -1,9 +1,12 @@
 <template>
   <div>
-    <h3>按入服时间排序</h3>
+    <h3>{{flag?'由先到后。':'由后到先。'}}</h3>
+    <a @click="flag = !flag" >切换排序</a>|
+    <a @click="flag1 = !flag1">切换黑名单</a>
     <div id="box">
       <div v-for="(list,k) in players" :key="k" id="list">
         <div class="item">
+          {{k+1}}
           <div class="name">
             <h3>{{list.name}}</h3>
             Banned:<code>{{list.banned}}</code>
@@ -19,41 +22,47 @@
 </template>
 
 <script>
-
   export default {
     name: "players-list",
     data() {
       return {
-        data: false
+        flag: true,
+        flag1:false
       }
     },
     computed: {
-      //   ...mapState({
-      //   players:state => state.players
-      // })
-      players() {
+      players: function () {
+        let flag = this.flag;
+        let flag1 = this.flag1
         function sort(property) { //排序
           return function (obj1, obj2) {
             let a = obj1[property];
             let b = obj2[property];
-            return a - b;     // 升序
+            if (flag) {
+              return a - b;     // 升序
+            } else {
+              return b - a; //降序
+            }
           }
         }
-
-        return this.$store.state.players.sort(sort('time_start'))
+        return this.$store.state.players.sort(sort('time_start')).filter(x=>x.banned === flag1)
       }
+    },
+    methods: {
     }
   }
 </script>
 
 <style scoped>
-  div{
+  div {
     text-align: center;
   }
-  #box{
+
+  #box {
     display: flex;
     flex-wrap: wrap;
   }
+
   #list {
     margin: 5.5px;
     width: 200px;
@@ -73,15 +82,17 @@
 
   }
 
-  .name{
+  .name {
     margin: auto;
   }
+
   .names {
     width: 100%;
     display: none;
     text-align: center;
   }
-  .names >p {
+
+  .names > p {
     font-size: 10px;
     margin: 1px;
     padding: 0;
@@ -108,6 +119,9 @@
     100% {
       opacity: 1
     }
+  }
+  a{
+    cursor: pointer;
   }
 
 </style>
