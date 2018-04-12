@@ -1,19 +1,17 @@
 <template>
   <div>
-    <h3>{{flag?'由先到后。':'由后到先。'}}</h3>
-    <a @click="flag = !flag" >切换排序</a>|
-    <a @click="flag1 = !flag1">切换黑名单</a>
-    <div id="box">
-      <div v-for="(list,k) in players" :key="k" id="list">
-        <div class="item">
-          {{k+1}}
-          <div class="name">
-            <h3>{{list.name}}</h3>
-            Banned:<code>{{list.banned}}</code>
-          </div>
-          <div class="names">
-            <h3>Names</h3>
-            <p v-for="(v,key) in list.names" :key="key">{{v.name}}</p>
+    <div id="head">
+      {{players}}
+      <h3>{{flag?'由早到晚。':'由晚到早。'}}</h3>
+      <a @click="flag = !flag">切换排序</a> |
+      <a @click="flag1 = !flag1">切换黑名单</a>
+    </div>
+    <div v-for="(v,k) in data" :key="k">
+      <h3>{{k}}</h3>
+      <div id="list">
+        <div v-for="(val,key) in data[k]" :key="key" id="names">
+          <div id="item">
+            <span id="name">{{val.name}}</span>
           </div>
         </div>
       </div>
@@ -27,13 +25,15 @@
     data() {
       return {
         flag: true,
-        flag1:false
+        flag1: false,
+        data: []
       }
     },
     computed: {
-      players: function () {
+      players() {
         let flag = this.flag;
         let flag1 = this.flag1
+
         function sort(property) { //排序
           return function (obj1, obj2) {
             let a = obj1[property];
@@ -45,83 +45,41 @@
             }
           }
         }
-        return this.$store.state.players.sort(sort('time_start')).filter(x=>x.banned === flag1)
+        this.$store.state.players.sort(sort('time_start'))
+        let re = _.groupBy(this.$store.state.players.filter(x => x.banned === flag1), function (item) {
+          let D = item.time_start
+          return (new Date(D).getFullYear() + "-" + (new Date(D).getMonth() + 1));
+        })
+        this.data = re
       }
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 
 <style scoped>
-  div {
-    text-align: center;
+  #head{
+    text-align: right;
+    margin-right: 10%;
   }
-
-  #box {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  #list {
-    margin: 5.5px;
-    width: 200px;
-    height: 200px;
-  }
-
-  .item {
-    width: 200px;
-    height: 200px;
+#list{
+  display: flex;
+  flex-wrap: wrap;
+}
+  #names{
+    width: 100px;
+    height: 25px;
+    margin: 8px;
+    font-size: 10px;
     border: 1px solid #BBB;
     border-radius: 5px;
-    transition: transform 1s;
-    display: flex;
-    background: #F6F6F6;
     box-shadow: 0 1px 3px #BBB;
     box-sizing: border-box;
-
-  }
-
-  .name {
-    margin: auto;
-  }
-
-  .names {
-    width: 100%;
-    display: none;
+    background: #F6F6F6;
     text-align: center;
-  }
-
-  .names > p {
-    font-size: 10px;
-    margin: 1px;
-    padding: 0;
-  }
-
-  #list:hover .item {
-    transform: rotateY(360deg);
-  }
-
-  #list:hover .item > .names {
-    display: block;
-    animation: 5s change
-  }
-
-  #list:hover .item > .name {
-    display: none;
-
-  }
-
-  @keyframes change {
-    0% {
-      opacity: 0
-    }
-    100% {
-      opacity: 1
-    }
+    line-height: 25px;
   }
   a{
     cursor: pointer;
   }
-
 </style>
