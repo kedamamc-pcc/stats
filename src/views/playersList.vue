@@ -5,20 +5,21 @@
       <h4>{{flag?'由早到晚！':'由晚到早！'}}  |  {{flag1?'无效玩家！':'有效玩家！'}}</h4>
       <a @click="flag = !flag">切换排序</a> | <a @click="flag1 = !flag1">切换黑名单</a>
     </div>
+    <hr/>
     <div v-for="(v,k) in data" :key="k">
-       <h3>{{k}}</h3>
-      <hr/>
+      <h3>{{k}}</h3>
       <div class="list">
         <div v-for="(val,key) in data[k]" :key="key" class="names" :style="{background:val.banned?'#222':'#F6F6F6',color:val.banned?'#DDD':'#000'}">
           <div class="item">
             <span class="name">{{val.name}}</span>
-            <div class="dsj" :style="{'border-right':val.banned?'10px solid #222':'10px solid #DDD'}"></div>
-            <span class="info" :style="{background:val.banned?'#222':'#F6F6F6',color:val.banned?'#DDD':'#000'}">
+            <div class="dsj"></div>
+            <span class="info">
               <p v-for="(vv,kk) in val.names" :key="kk" class="pp">{{vv.name}}</p>
             </span>
           </div>
         </div>
       </div>
+      <hr/>
     </div>
   </div>
 </template>
@@ -66,6 +67,9 @@
     text-align: right;
     margin-right: 10%;
   }
+  h3{
+    padding-left: 10px;
+  }
 .list{
   display: flex;
   flex-wrap: wrap;
@@ -91,8 +95,9 @@
     left: 120px;
     top: 5px;
     border: 10px solid transparent;
-    border-right: 10px solid #DDD;
+    border-right: 10px solid #222;
     display: none;
+    color: #222;
   }
   .info{
     display: inline-block;
@@ -103,7 +108,8 @@
     border-radius: 5px;
     /*box-shadow: 0 1px 3px #BBB;*/
     z-index: 1;
-    background: #F6F6F6;
+    color: #DDD;
+    background: #222;
   }
   .pp{
     margin: 0 auto;

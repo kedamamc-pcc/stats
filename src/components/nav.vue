@@ -39,11 +39,13 @@
        */
       Birthday() {
         return this.$store.state.players.filter(x => {
-          let birthday = new Date(x.time_start)
-          let M = (birthday.getMonth() + 1) + "-" + birthday.getDate()
-          let D = new Date()
-          let T = (D.getMonth() + 1) + "-" + D.getDate()
-          return M === T
+          if(!x.banned){
+            let birthday = new Date(x.time_start)
+            let M = (birthday.getMonth() + 1) + "-" + birthday.getDate()
+            let D = new Date()
+            let T = (D.getMonth() + 1) + "-" + D.getDate()
+            return M === T
+          }
         }).length
       },
       /**
