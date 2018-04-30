@@ -3,7 +3,6 @@ import Router from 'vue-router'
 
 import Boards from '@/views/boards'
 import Players from '@/views/playersList'
-import Birthday from '@/views/Birthday'
 import Yesterday from '@/views/Yesterday'
 import Last from '@/views/Last'
 Vue.use(Router)
@@ -27,8 +26,8 @@ export default new Router({
     },
     {
       name:'Birthday',
-      path: '/Birthday',
-      component: Birthday,
+      path: '/birthdays',
+      component: () => import('@/views/birthdays'),
     },
     {
       name:'Yesterday',

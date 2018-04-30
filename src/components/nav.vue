@@ -11,9 +11,9 @@
           <dt>有效玩家</dt>
           <dd>{{validPlayerCount}}</dd>
         </router-link>
-        <router-link tag="div" to="/Birthday">
+        <router-link tag="div" to="/birthdays">
           <dt>今日生日</dt>
-          <dd>{{Birthday}}</dd>
+          <dd>{{birthdayCount}}</dd>
         </router-link>
         <router-link tag="div" to="/Yesterday">
           <dt>昨日入服</dt>
@@ -30,27 +30,18 @@
 
 <script>
   export default {
+    data() {
+      return {
+        today: new Date(),
+      }
+    },
     computed: {
       validPlayerCount() {
         return this.$store.state.players.filter(p => !p.banned).length
       },
-      /**
-       * @return {number}
-       */
-      Birthday() {
-        return this.$store.state.players.filter(x => {
-          if(!x.banned){
-            let birthday = new Date(x.time_start)
-            let M = (birthday.getMonth() + 1) + "-" + birthday.getDate()
-            let D = new Date()
-            let T = (D.getMonth() + 1) + "-" + D.getDate()
-            return M === T
-          }
-        }).length
+      birthdayCount() {
+        return this.$store.getters.birthdays.length
       },
-      /**
-       * @return {number}
-       */
       Yesterday() {
         return this.$store.state.players.filter(x => {
           let birthday = new Date(x.time_start)
@@ -61,9 +52,6 @@
           return M === P
         }).length
       },
-      /**
-       * @return {number}
-       */
       Time_Last() {
         return this.$store.state.players.filter(x => {
           let birthday = new Date(x.time_last)
@@ -73,7 +61,7 @@
           let P = S.getFullYear() + "-" + (S.getMonth() + 1) + "-" + S.getDate()
           return M === P
         }).length
-      }
+      },
     },
   }
 </script>
@@ -111,6 +99,9 @@
 
   .link_home {
     font-weight: 300;
+    margin: 0 .3em;
+    padding-bottom: .2em;
+    border-bottom: 1px solid #444;
   }
 
   .link_kpcc {

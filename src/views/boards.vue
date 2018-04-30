@@ -40,7 +40,7 @@
   ])
 
   export default {
-    name: 'board',
+    name: 'BoardsView',
     components: {
       Board,
     },
