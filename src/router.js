@@ -3,41 +3,36 @@ import Router from 'vue-router'
 
 import Boards from '@/views/boards'
 import Players from '@/views/playersList'
-import Yesterday from '@/views/Yesterday'
-import Last from '@/views/Last'
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      name:'404',
-      path: '*',
-      component: Boards,
-    },
-    {
-      name:'index',
+      name: 'index',
       path: '/',
       component: Boards,
     },
     {
-      name:'PlayersList',
-      path: '/Players',
+      name: 'players',
+      path: '/players',
       component: Players,
     },
     {
-      name:'Birthday',
+      name: 'birthdays',
       path: '/birthdays',
       component: () => import('@/views/birthdays'),
     },
     {
-      name:'Yesterday',
-      path: '/Yesterday',
-      component: Yesterday,
+      name: 'yesterday',
+      path: '/yesterday',
+      component: () => import('@/views/yesterday'),
     },
     {
-      name:'Last',
-      path: '/Last',
-      component: Last,
-    }
+      name: 'newbies',
+      path: '/newbies',
+      component: () => import('@/views/newbies'),
+    },
+    {path: '*', redirect: '/'},
   ],
 })

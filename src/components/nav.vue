@@ -15,11 +15,11 @@
           <dt>今日生日</dt>
           <dd>{{birthdayCount}}</dd>
         </router-link>
-        <router-link tag="div" to="/Yesterday">
+        <router-link tag="div" to="/newbies">
           <dt>昨日入服</dt>
           <dd>{{yesterdayLogUpCount}}</dd>
         </router-link>
-        <router-link tag="div" to="/Last">
+        <router-link tag="div" to="/yesterday">
           <dt>昨日上线</dt>
           <dd>{{yesterdayLogInCount}}</dd>
         </router-link>
