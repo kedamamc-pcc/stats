@@ -17,11 +17,11 @@
         </router-link>
         <router-link tag="div" to="/Yesterday">
           <dt>昨日入服</dt>
-          <dd>{{Yesterday}}</dd>
+          <dd>{{yesterdayLogUpCount}}</dd>
         </router-link>
         <router-link tag="div" to="/Last">
           <dt>昨日上线</dt>
-          <dd>{{Time_Last}}</dd>
+          <dd>{{yesterdayLogInCount}}</dd>
         </router-link>
       </dl>
     </div>
@@ -42,25 +42,11 @@
       birthdayCount() {
         return this.$store.getters.birthdays.length
       },
-      Yesterday() {
-        return this.$store.state.players.filter(x => {
-          let birthday = new Date(x.time_start)
-          let M = birthday.getFullYear() + "-" + (birthday.getMonth() + 1) + "-" + birthday.getDate()
-          let D = new Date().getTime() - (24 * 60 * 60 * 1000)
-          let S = new Date(D)
-          let P = S.getFullYear() + "-" + (S.getMonth() + 1) + "-" + S.getDate()
-          return M === P
-        }).length
+      yesterdayLogInCount() {
+        return this.$store.getters.yesterdayLogIn.length
       },
-      Time_Last() {
-        return this.$store.state.players.filter(x => {
-          let birthday = new Date(x.time_last)
-          let M = birthday.getFullYear() + "-" + (birthday.getMonth() + 1) + "-" + birthday.getDate()
-          let D = new Date().getTime() - (24 * 60 * 60 * 1000)
-          let S = new Date(D)
-          let P = S.getFullYear() + "-" + (S.getMonth() + 1) + "-" + S.getDate()
-          return M === P
-        }).length
+      yesterdayLogUpCount() {
+        return this.$store.getters.yesterdayLogUp.length
       },
     },
   }

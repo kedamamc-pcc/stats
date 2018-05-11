@@ -1,7 +1,7 @@
 <template>
   <div>
     <header :class="$style.header">
-      <h1 v-if="birthdays.length">N 年前的 {{today | formatDate('M 月 D 日')}}，{{pronoun}}来到了毛线</h1>
+      <h1 v-if="birthdays.length">N 年前的 {{$store.state.today | formatDate('M 月 D 日')}}，{{pronoun}}来到了毛线</h1>
       <h1 v-else>今天没有人过生日</h1>
     </header>
 
@@ -26,11 +26,6 @@
 
   export default {
     name: "BirthdaysView",
-    data() {
-      return {
-        today: new Date()
-      }
-    },
     computed: {
       birthdays() {
         return this.$store.getters.birthdays

@@ -9,20 +9,32 @@ const MUTATIONS = {
   players: 'players',
 }
 
+const today = new Date('2018-04-01 12:34:56') // FIXME: For dev
+today.setHours(0, 0, 0, 0)
+const yesterday = new Date(new Date(today).setDate(today.getDate() - 1))
+
 export default new Vuex.Store({
   state: {
     update: null,
     players: [],
+    today,
+    yesterday,
   },
   getters: {
-    birthdays({players}) {
-      const tStr = formatDate(new Date(), 'YYMMDD')
+    birthdays({players, today}) {
+      const tStr = formatDate(today, 'YYMMDD')
       return players.filter(p => {
         const pStr = formatDate(p.time_start, 'YYMMDD')
         return !p.banned
           && tStr.slice(2) === pStr.slice(2)
           && tStr.slice(0, 2) !== pStr.slice(0, 2) // 排除今天刚入服的
       }).sort((a, b) => a.time_start - b.time_start)
+    },
+    yesterdayLogIn({players, today, yesterday}) {
+      return players.filter(p => yesterday <= p.time_last && p.time_last < today)
+    },
+    yesterdayLogUp({players, today, yesterday}) {
+      return players.filter(p => yesterday <= p.time_start && p.time_start < today)
     },
   },
   mutations: {
