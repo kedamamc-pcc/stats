@@ -5,7 +5,9 @@ import {formatDate} from '@/common/filters'
 
 Vue.use(Vuex)
 
-const MUTATIONS = {
+export const MUTATIONS = {
+  showSpinner: 'show-spinner',
+  hideSpinner: 'hide-spinner',
   players: 'players',
 }
 
@@ -15,6 +17,7 @@ const yesterday = new Date(new Date(today).setDate(today.getDate() - 1))
 
 export default new Vuex.Store({
   state: {
+    spinner: false,
     update: null,
     players: [],
     today,
@@ -43,6 +46,12 @@ export default new Vuex.Store({
     },
     players(state, players) {
       state.players = players
+    },
+    [MUTATIONS.showSpinner](state) {
+      state.spinner = true
+    },
+    [MUTATIONS.hideSpinner](state) {
+      state.spinner = false
     },
   },
   actions: {
