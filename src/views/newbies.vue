@@ -1,22 +1,26 @@
 <template>
   <div>
-    <header>
+    <header :class="$style.header">
       <h1>昨天（{{$store.state.yesterday | formatDate('YYYY 年 M 月 D 日')}}）{{pronoun}}来到了毛线</h1>
     </header>
 
-    <div class="B">
-      <p v-for="p of players">{{p.name}}</p>
-    </div>
+    <CardList :players="players" :class="$style.cardlist"/>
 
-    <footer v-if="players.length">欢迎萌新！</footer>
+    <footer v-if="players.length" :class="$style.footer">欢迎萌新！</footer>
   </div>
 </template>
 
 <script>
+  import CardList from '../components/card-list'
+  import Card from '../components/card'
   import {formatDate} from '@/common/filters'
 
   export default {
     name: "NewbiesView",
+    components: {
+      CardList,
+      Card,
+    },
     computed: {
       players() {
         return this.$store.getters.yesterdayLogUp
@@ -31,26 +35,31 @@
   }
 </script>
 
-<style scoped>
-  div{
+<style module>
+  .cardlist {
+    composes: page-section from '../global.css';
+
+    margin-top: 10px;
+  }
+
+  .header, .footer {
     text-align: center;
   }
-  .B{
-    width: 50%;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
+
+  .header {
+    composes: page-header from '../global.css';
   }
-  .B p{
-    width: 150px;
-    height: 30px;
-    line-height: 30px;
-    background: #F6F6F6;
-    margin: 5px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px solid #BBB;
-    box-shadow: 0 1px 3px #BBB;
-    font-size: 10px;
+
+  .header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 58px;
+    font-weight: normal;
+  }
+
+  .footer {
+    margin: 30px 0;
+    font-size: 1.5rem;
+    color: #CCC;
   }
 </style>

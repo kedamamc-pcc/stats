@@ -62,14 +62,14 @@
   }
 
   .group_title {
-    composes: middle-section from '../global.css';
+    composes: page-section from '../global.css';
 
     font-size: 1.5em;
     font-weight: normal;
   }
 
   .boards {
-    composes: middle-section from '../global.css';
+    composes: page-section from '../global.css';
 
     display: flex;
     flex-wrap: wrap;

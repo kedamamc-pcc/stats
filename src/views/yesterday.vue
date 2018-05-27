@@ -1,50 +1,48 @@
 ﻿<template>
   <div>
-    <h3>当前时间:{{time}}</h3>
-   <div class="B">
-     <p v-for="p in players">
-       {{p.name}}
-     </p>
-   </div>
+    <header :class="$style.header">
+      <h1>昨天（{{$store.state.yesterday | formatDate('YYYY 年 M 月 D 日')}}）{{pronoun}}来过毛线</h1>
+    </header>
+
+    <CardList :players="players" :class="$style.cardlist"/>
   </div>
 </template>
 
 <script>
+  import CardList from '../components/card-list'
+  import Card from '../components/card'
+  import {formatDate} from '@/common/filters'
+
   export default {
     name: 'YesterdayView',
+    components: {
+      CardList,
+      Card,
+    },
     computed: {
       players() {
         return this.$store.getters.yesterdayLogIn
       },
-      time(){
-        let D = new Date()
-        let T = (D.getMonth() + 1) + "月" + D.getDate()+"日"
-        return T
-      }
+      pronoun() {
+        return this.players.length === 1 ? '你' : '你们'
+      },
+    },
+    filters: {
+      formatDate,
     },
   }
 </script>
 
-<style scoped>
-  div{
+<style module>
+  .header {
+    composes: page-header from '../global.css';
+
     text-align: center;
   }
-  .B{
-    width: 50%;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-   }
-  .B p{
-    width: 150px;
-    height: 30px;
-    line-height: 30px;
-    background: #F6F6F6;
-    margin: 5px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px solid #BBB;
-    box-shadow: 0 1px 3px #BBB;
-    font-size: 10px;
+
+  .cardlist {
+    composes: page-section from '../global.css';
+
+    margin-top: 10px;
   }
 </style>

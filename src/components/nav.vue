@@ -58,7 +58,7 @@
   }
 
   .inner_wrap {
-    composes: middle-section from '../global.css';
+    composes: page-section from '../global.css';
 
     display: flex;
     align-items: center;

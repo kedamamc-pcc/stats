@@ -10,10 +10,12 @@
 
 <script>
   import Nav from './components/nav'
+  import Spinner from './components/spinner'
 
   export default {
     components: {
       Nav,
+      Spinner,
     },
     async beforeCreate() {
       const [info, players] = [

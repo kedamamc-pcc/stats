@@ -11,7 +11,7 @@ export const MUTATIONS = {
   players: 'players',
 }
 
-const today = new Date('2018-04-01 12:34:56') // FIXME: For dev
+const today = new Date('2018-04-01 11:11:11')
 today.setHours(0, 0, 0, 0)
 const yesterday = new Date(new Date(today).setDate(today.getDate() - 1))
 

@@ -5,16 +5,9 @@
       <h1 v-else>今天没有人过生日</h1>
     </header>
 
-    <section :class="$style.card_con">
-      <ul>
-        <li v-for="p of birthdays">
-          <a :href="`https://stats.craft.moe/player/${p.uuid}`" target="_blank" :class="$style.card">
-            <p :class="$style.card_name"><code>{{p.name}}</code></p>
-            <!--<p :class="$style.card_year"><span>{{new Date(p.time_start).getFullYear()}}</span></p>-->
-          </a>
-        </li>
-        <li v-for="n of 5 - (birthdays.length % 5 || 5)"></li>
-      </ul>
+    <section :class="$style.cardlist">
+      <Card v-for="p of birthdays" :key="p.uuid" :data="p" :class="$style.card"></Card>
+      <div v-for="n of 5 - (birthdays.length % 5 || 5)" :class="$style.empty"></div>
     </section>
 
     <footer v-if="birthdays.length" :class="$style.footer">感谢有{{pronoun}}，生日快乐！</footer>
@@ -22,10 +15,14 @@
 </template>
 
 <script>
-  import {formatDate} from '@/common/filters'
+  import Card from '@/components/card'
+  import {formatDate, firstNameInKedama} from '@/common/filters'
 
   export default {
     name: "BirthdaysView",
+    components: {
+      Card,
+    },
     computed: {
       birthdays() {
         return this.$store.getters.birthdays
@@ -36,43 +33,55 @@
     },
     filters: {
       formatDate,
+      firstNameInKedama,
     },
   }
 </script>
 
 <style module>
-  .card_con {
-    composes: middle-section from '../global.css';
+  .header, .footer {
+    text-align: center;
   }
 
-  .card_con ul {
-    margin: 10px 0;
-    padding: 0;
-    list-style: none;
+  .header {
+    composes: page-header from '../global.css';
+  }
+
+  .cardlist {
+    composes: page-section from '../global.css';
+
     display: flex;
     flex-wrap: wrap;
+    margin-top: 10px;
   }
 
-  .card_con li {
+  .card, .empty {
     flex: 1 1 20%;
   }
 
-  .card {
-    display: block;
-    padding: 20px;
-    border-radius: 6px;
-    color: inherit;
-    text-decoration: none;
-    transition: background .1s linear;
+  .firstName {
+    position: absolute;
+    margin-top: 10px;
+    width: 100%;
   }
 
-  .card:hover {
-    background: #f3f3f3;
-  }
-
-  .card p {
+  .first {
+    font-family: monospace;
+    font-size: 12px;
+    color: #777;
     margin: 0;
-    line-height: 1;
+  }
+
+  .first_desc {
+    color: #AAA;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity .2s linear;
+    margin: .5rem 0 0;
+  }
+
+  .card:hover .first_desc {
+    opacity: 1;
   }
 
   .card_name {
@@ -83,14 +92,6 @@
     margin-top: 1em;
     font-size: 14px;
     color: #777;
-  }
-
-  .header, .footer {
-    text-align: center;
-  }
-
-  .header {
-    border-bottom: 1px solid #CCC;
   }
 
   .header h1 {

@@ -19,3 +19,8 @@ export function formatDate(date = new Date(), format = 'YYYY-MM-DD') {
 
   return r
 }
+
+export function firstNameInKedama(player) {
+  const timeStart = player.time_start
+  return player.names.find(n => n.changedToAt <= timeStart || !n.changedToAt).name
+}
