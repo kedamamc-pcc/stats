@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Boards from '@/views/boards'
-import Players from '@/views/playersList'
+import PlayersView from '@/views/players'
 
 Vue.use(Router)
 
@@ -11,12 +10,12 @@ export default new Router({
     {
       name: 'index',
       path: '/',
-      component: Boards,
+      redirect: '/players',
     },
     {
       name: 'players',
       path: '/players',
-      component: Players,
+      component: PlayersView,
     },
     {
       name: 'birthdays',

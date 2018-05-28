@@ -39,6 +39,12 @@ export default new Vuex.Store({
     yesterdayLogUp({players, today, yesterday}) {
       return players.filter(p => yesterday <= p.time_start && p.time_start < today)
     },
+    validPlayers({players}) {
+      return players.filter(p => !p.banned).sort((a, b) => a.time_start - b.time_start)
+    },
+    bannedPlayers({players}) {
+      return players.filter(p => p.banned).sort((a, b) => a.time_start - b.time_start)
+    },
   },
   mutations: {
     update(state, update) {

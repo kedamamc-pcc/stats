@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.wrap">
+  <div :class="[$style.wrap, compact ? $style.compact : null]">
     <p :class="$style.name">{{data.name}}</p>
     <slot :class="$style.slot"/>
   </div>
@@ -8,7 +8,7 @@
 <script>
   export default {
     name: 'Card',
-    props: ['data'],
+    props: ['data', 'compact'],
   }
 </script>
 
@@ -23,6 +23,10 @@
 
   .wrap:hover {
     background: #f3f3f3;
+  }
+
+  .wrap.compact {
+    padding: 10px;
   }
 
   .name {
