@@ -4,8 +4,8 @@
       <ul>
         <li>
           <span>排列顺序</span>
-          <a :class="{[$style.active]: ascending}" @click="ascending = true">萌新在后</a>
           <a :class="{[$style.active]: !ascending}" @click="ascending = false">萌新在前</a>
+          <a :class="{[$style.active]: ascending}" @click="ascending = true">萌新在后</a>
         </li>
         <li>
           <span>玩家类型</span>
@@ -46,7 +46,7 @@
     },
     data() {
       return {
-        ascending: true,
+        ascending: false,
         showBanned: false,
       }
     },
